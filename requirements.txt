@@ -1,0 +1,6 @@
+Django==1.11
+Jinja2==2.9.6
+MarkupSafe==1.0
+python-google-places==1.4.0
+pytz==2017.2
+six==1.10.0
