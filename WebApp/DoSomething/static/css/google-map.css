@@ -1,0 +1,35 @@
+.events-page,
+.events-page>body,
+.events-page>body>#container,
+.events-page>body>#container>*,
+.events-page>body>#container>*>*,
+.events-page>body>#container>*>*>#map{
+    height:100%;
+    overflow:hidden;
+}
+
+
+.info-box-container {
+    width:100%;
+}
+
+.gm-style-iw,
+.gm-style-iw div {
+    overflow:hidden !important;
+}
+
+
+.gm-style-iw {
+
+    top: 15px !important;
+    left: 20px !important;
+    padding:10px;
+    background-color: #fff;
+    box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+    border: 1px solid rgba(72, 181, 233, 0.6);
+    border-radius: 5px 5px 5px 5px;
+}
+
+.events-page #map {
+    height: 100%;
+}

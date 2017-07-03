@@ -1,0 +1,240 @@
+{% extends 'page.html' %}
+{% load static %}
+
+{% block page_class %}full detail-page{% endblock %}
+
+{% block title %}{{ place.name }}{% endblock %}
+
+{% block css %}
+<!-- Custom CSS -->
+<link href="{% static 'css/details.css' %}" rel="stylesheet">
+<link href="{% static 'css/article-carousel.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="col-md-10 col-md-offset-1 middle">
+    <div class="panel panel-success">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h1 >
+                        {{ place.name }}
+                    </h1>
+                </div>
+                <div class="col-sm-5">
+                    <h1>
+                        <span class="pull-right stars">
+                            {% if place.rating %}
+                            {% if place.rating >= 1 %}
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            {% elif place.rating > 0 %}
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            {% else %}
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                            {% endif%}
+
+                            {% if place.rating >= 2 %}
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            {% elif place.rating > 1 %}
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            {% else %}
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                            {% endif%}
+
+
+                            {% if place.rating >= 3 %}
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            {% elif place.rating > 2 %}
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            {% else %}
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                            {% endif%}
+
+
+                            {% if place.rating >= 4 %}
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            {% elif place.rating > 3 %}
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            {% else %}
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                            {% endif%}
+
+
+                            {% if place.rating >= 5 %}
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            {% elif place.rating > 4 %}
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            {% else %}
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                            {% endif%}
+
+                            {% else %}
+                            {% endif %}
+                        </span>
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="page-content"></p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <dl>
+                                <dt>
+                                <h4><strong>Address</strong></h4>
+                                </dt>
+                                <dd>
+                                    <address>{{ place.location.address }}</address>
+                                </dd>
+                                <dt>
+                                <h4><strong>Phone Number</strong></h4>
+                                </dt>
+                                <dd>
+                                    <address>
+                                        {% if place.phone_number %}
+                                        {{ place.phone_number }}
+                                        {% else %}
+                                        No Phone Available
+                                        {% endif %}
+                                    </address>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <dl>
+                                <dt>
+                                <h4><strong>Hours</strong></h4>
+                                </dt>
+                                <dd>
+                                    <address>
+                                        {% if place.openinghour %}
+                                        Mon: <span class="pull-right">{{ place.openinghour.monday }}</span>
+                                        <br/>
+                                        Tue: <span class="pull-right">{{ place.openinghour.tuesday }}</span>
+                                        <br/>
+                                        Wed: <span class="pull-right">{{ place.openinghour.wednesday }}</span>
+                                        <br/>
+                                        Thu: <span class="pull-right">{{ place.openinghour.thursday }}</span>
+                                        <br/>
+                                        Fri: <span class="pull-right">{{ place.openinghour.friday }}</span>
+                                        <br/>
+                                        Sat: <span class="pull-right">{{ place.openinghour.saturday }}</span>
+                                        <br/>
+                                        Sun: <span class="pull-right">{{ place.openinghour.sunday }}</span>
+                                        <br/>
+                                        {% else %}
+                                        No Hours Available
+                                        {% endif %}
+                                    </address>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <dt>
+                            <h4><strong>Website</strong></h4>
+                            </dt>
+                            <dd>
+                                <address class="website-url-container">
+                                    {% if place.website %}
+                                    <a href="{{ place.website }}">{{ place.website }}</a>
+                                    {% else %}
+                                    No Website Available
+                                    {% endif %}
+                                </address>
+                            </dd>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <dt>
+                            <h4><strong>Map</strong> <span class="pull-right">{{ distance }}km away</span></h4>
+                            </dt>
+                            <dd>
+                                <div id="map"></div>
+                            </dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <dt>
+                    <h4>
+
+                        <strong>Reviews</strong>
+                    </h4>
+                    </dt>
+                    <dd>
+                        {% if place.review_set.all %}
+                        <div class="row">
+                            {% for review in place.review_set.all %}
+                            <div class="col-lg-6">
+                                <blockquote>
+                                    <p>
+                                        <strong>Ratings:</strong> {{ review.rating }} <br>
+                                        {{ review.text }}
+                                    </p>
+                                    <small>
+                                        {% if review.author_url %}
+                                        <a href="{{ review.author_url }}">
+                                            {{ review.author_name }}
+                                        </a>
+                                        {% else %}
+                                        {{ review.author_name }}
+                                        {% endif %}
+                                    </small>
+                                </blockquote>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        Reviews aren't available.
+                        {% endif %}
+                    </dd>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>-->
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+$('.carousel').carousel()
+</script>
+
+<script>
+    function initMap() {
+        var lat = {{ place.location.latitude }}
+        var lng = {{ place.location.longitude }}
+
+        <!--console.log(lat)-->
+        <!--console.log(lng)-->
+        var location = {lat: lat, lng: lng};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: location
+        });
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXeG0NzmIvQN_94Wcv-AjjwJBUhtTThlQ&callback=initMap">
+</script>
+{% endblock %}
+
+

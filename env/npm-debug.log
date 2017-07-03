@@ -1,0 +1,68 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'uninstall',
+1 verbose cli   'geolocation-marker' ]
+2 info using npm@3.5.2
+3 info using node@v4.2.6
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly uninstall loadAllDepsIntoIdealtree
+19 silly loadAllDepsIntoIdealTree Finishing
+20 silly idealTree:prePrune env
+21 silly loadIdealTree Finishing
+22 silly currentTree env
+23 silly idealTree env
+24 silly generateActionsToTake Starting
+25 silly install generateActionsToTake
+26 silly generateActionsToTake Finishing
+27 silly diffTrees action count 0
+28 silly decomposeActions action count 0
+29 silly executeActions Starting
+30 silly install executeActions
+31 silly doSerial global-install 0
+32 silly doParallel fetch 0
+33 verbose lock using /home/carlcastello/.npm/_locks/staging-a41d0b1893010be8.lock for /home/carlcastello/Desktop/SummerApp/DoSomething2/env/node_modules/.staging
+34 verbose unlock done using /home/carlcastello/.npm/_locks/staging-a41d0b1893010be8.lock for /home/carlcastello/Desktop/SummerApp/DoSomething2/env/node_modules/.staging
+35 silly rollbackFailedOptional Starting
+36 silly rollbackFailedOptional Finishing
+37 silly runTopLevelLifecycles Starting
+38 silly runTopLevelLifecycles Finishing
+39 silly install printInstalled
+40 warn enoent ENOENT: no such file or directory, open '/home/carlcastello/Desktop/SummerApp/DoSomething2/env/package.json'
+41 warn env No description
+42 warn env No repository field.
+43 warn env No README data
+44 warn env No license field.
+45 verbose stack Error: EACCES: permission denied, mkdir '/home/carlcastello/Desktop/SummerApp/DoSomething2/env/node_modules/.staging'
+45 verbose stack     at Error (native)
+46 verbose cwd /home/carlcastello/Desktop/SummerApp/DoSomething2/env
+47 error Linux 4.4.0-81-generic
+48 error argv "/usr/bin/nodejs" "/usr/bin/npm" "uninstall" "geolocation-marker"
+49 error node v4.2.6
+50 error npm  v3.5.2
+51 error path /home/carlcastello/Desktop/SummerApp/DoSomething2/env/node_modules/.staging
+52 error code EACCES
+53 error errno -13
+54 error syscall mkdir
+55 error Error: EACCES: permission denied, mkdir '/home/carlcastello/Desktop/SummerApp/DoSomething2/env/node_modules/.staging'
+55 error     at Error (native)
+55 error  { [Error: EACCES: permission denied, mkdir '/home/carlcastello/Desktop/SummerApp/DoSomething2/env/node_modules/.staging']
+55 error   errno: -13,
+55 error   code: 'EACCES',
+55 error   syscall: 'mkdir',
+55 error   path: '/home/carlcastello/Desktop/SummerApp/DoSomething2/env/node_modules/.staging' }
+56 error Please try running this command again as root/Administrator.
+57 verbose exit [ -13, true ]

@@ -1,0 +1,181 @@
+{% extends 'page.html' %}
+{% load static %}
+
+{% block page_class %}categories-page{% endblock %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block css %}
+
+
+{% endblock %}
+
+{% block content%}
+<div class="row">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="{% url 'DoSomething:categories_list_view' 'food_and_restaurant' %}" class="list-group-item">
+                Food and Restaurant
+            </a>
+            <a href="{% url 'DoSomething:categories_list_view' 'recreation' %}" class="list-group-item">
+                Recreation
+            </a>
+            <a href="{% url 'DoSomething:categories_list_view' 'night_life' %}" class="list-group-item">
+                Night Life
+            </a>
+            <a href="{% url 'DoSomething:categories_list_view' 'todos' %}" class="list-group-item">
+                Todo's
+            </a>
+            <a href="{% url 'DoSomething:categories_list_view' 'points_of_interest' %}" class="list-group-item">
+                POI's
+            </a>
+            <a href="{% url 'DoSomething:categories_list_view' 'random' %}" class="list-group-item">
+                Random
+            </a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            {% for place in places %}
+            {% for place, distance in place.items %}
+            <div class="col-lg-4 col-sm-6">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div class="header">
+                            <h4 class="page-header">
+                                <a href="{% url 'DoSomething:detail_view' place.place_id type %}">{{ place.name }}</a>
+                            </h4>
+                        </div>
+                        <p>
+                            Distance Away:
+                            <span class="pull-right">
+                                <strong>{{ distance }} km</strong>
+                            </span>
+                        </p>
+
+                        <p>{{ place.location.address }}</p>
+
+                        <div class="ratings">
+                            <p class="pull-right">
+                                {{ place.review_set.count }} reviews
+                            </p>
+                            <p>
+                                {% if place.rating %}
+                                {% if place.rating >= 1 %}
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif place.rating > 0 %}
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                {% else %}
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                {% endif%}
+
+                                {% if place.rating >= 2 %}
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif place.rating > 1 %}
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                {% else %}
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                {% endif%}
+
+
+                                {% if place.rating >= 3 %}
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif place.rating > 2 %}
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                {% else %}
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                {% endif%}
+
+
+                                {% if place.rating >= 4 %}
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif place.rating > 3 %}
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                {% else %}
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                {% endif%}
+
+
+                                {% if place.rating >= 5 %}
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {% elif place.rating > 4 %}
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                {% else %}
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                {% endif%}
+
+                                {% else %}
+                                No Ratings
+                                {% endif %}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                {% if is_paginated %}
+                <ul class="pagination">
+                    <li>
+                        <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i><i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+
+                    {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    <li class="active">
+                        <span>
+                            {{ i }}
+                            <span class="sr-only">
+                            (current)
+                            </span>
+                        </span>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="?page={{ i }}">
+                            {{ i }}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                    <li>
+                        <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+
+
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+$(document).ready(function() {
+    var url = window.location;
+    var element = $('.list-group a').filter(function() {
+    return this.href == url || url.href.indexOf(this.href) == 0; }).addClass('active');
+    if (element.is('a')) {
+        element.addClass('active')
+    }
+});
+</script>
+
+{% endblock %}

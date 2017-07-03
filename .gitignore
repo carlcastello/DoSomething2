@@ -27,3 +27,7 @@ tests/report/
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+
+
+# Pem Files
+*.pem

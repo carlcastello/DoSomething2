@@ -1,0 +1,149 @@
+{% extends 'page.html' %}
+{% load static %}
+
+{% block page_class %}full home-page{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block css %}
+<!-- Custom CSS -->
+<link href="{% static 'css/material-design-switch.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 middle">
+        <div class="panel panel-success">
+            <div class="panel-body">
+                <form method="post" role="form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    Categories
+                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Food
+                                        <div class="material-switch pull-right">
+                                            <input id="food_and_restaurant" name="food_and_restaurant" type="checkbox" checked/>
+                                            <label for="food_and_restaurant" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Recreation
+                                        <div class="material-switch pull-right">
+                                            <input id="recreation" name="recreation" type="checkbox" checked/>
+                                            <label for="recreation" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Events
+                                        <div class="material-switch pull-right">
+                                            <input id="events" name="events" type="checkbox" checked/>
+                                            <label for="events" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        POI's
+                                        <div class="material-switch pull-right">
+                                            <input id="points_of_interest" name="points_of_interest" type="checkbox" checked/>
+                                            <label for="points_of_interest" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    Distance
+                                </div>
+                                <!-- List group -->
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        0 - 5 km
+                                        <div class="material-switch pull-right">
+                                            <input id="fifteen_check_box" name="five_check_box" type="checkbox" checked/>
+                                            <label for="fifteen_check_box" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        0 - 10 km
+                                        <div class="material-switch pull-right">
+                                            <input id="thirty_check_box" name="ten_check_box" type="checkbox" checked/>
+                                            <label for="thirty_check_box" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        0 - 15 km
+                                        <div class="material-switch pull-right">
+                                            <input id="fourty_five_check_box" name="fifteen_five_check_box" type="checkbox" checked/>
+                                            <label for="fourty_five_check_box" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        0 - 20 km
+                                        <div class="material-switch pull-right">
+                                            <input id="infinity_check_box" name="twenty_check_box" type="checkbox" checked/>
+                                            <label for="infinity_check_box" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    Price Point
+                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Free
+                                        <div class="material-switch pull-right">
+                                            <input id="free_check_box" name="free_check_box" type="checkbox" checked/>
+                                            <label for="free_check_box" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Inexpensive
+                                        <div class="material-switch pull-right">
+                                            <input id="inexpensive_check_box" name="inexpensive_check_box" type="checkbox" checked/>
+                                            <label for="inexpensive_check_box" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Moderate
+                                        <div class="material-switch pull-right">
+                                            <input id="moderate_five_check_box" name="moderate_five_check_box" type="checkbox" checked/>
+                                            <label for="moderate_five_check_box" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Expensive
+                                        <div class="material-switch pull-right">
+                                            <input id="expensive_check_box" name="expensive_check_box" type="checkbox" checked/>
+                                            <label for="expensive_check_box" class="label-info"></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                            <button class="btn btn-success full-width" value="true" name="proceed" id="proceed">
+                                <h4>
+                                    DoSomething!
+                                </h4>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

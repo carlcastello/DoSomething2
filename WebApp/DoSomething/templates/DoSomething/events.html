@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_class %}events-page{% endblock %}
+
+{% block title %}Events{% endblock %}
+
+{% block css %}
+    <!--<link href="{% static 'css/custom.css' %}" rel="stylesheet">-->
+    <link href="{% static 'css/google-map.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block wrapper %}
+    <div id="map"></div>
+{% endblock %}
+
+{% block javascript %}
+
+
+<!--<script src="{% static 'js/geolocation-marker/geolocation-marker.js' %}"></script>-->
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXeG0NzmIvQN_94Wcv-AjjwJBUhtTThlQ&callback=initMap">
+</script>
+
+<script>
+function initMap() {
+    var lat = {{ latitude }}
+    var lng = {{ longitude }}
+
+    var location = {lat: lat, lng: lng};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: location
+    });
+    <!--var marker = new google.maps.Marker({-->
+        <!--position: location,-->
+        <!--map: map-->
+    <!--});-->
+
+    var markers = []
+    {% for event in events %}
+    var marker = new google.maps.Marker({
+        position: {lat:{{ event.location.latitude }}, lng:{{ event.location.longitude }}},
+        map: map,
+        html:" \
+            <div class='info-box-container'> \
+                <div class='row'> \
+                    <div class='col-lg-12'> \
+                        <h3 class='page-header'> \
+                            {{ event.name }} \
+                        </h3> \
+                    </div> \
+                </div> \
+                <div class='row'> \
+                    <div class='col-lg-12' > \
+                            <dl> \
+                                <dt> \
+                                    Description \
+                                </dt> \
+                                <dd> \
+                                    {{ event.description }} \
+                                </dd> \
+                            </dl> \
+                    </div> \
+                </div> \
+                <div class='row'> \
+                    <div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'> \
+                            <dl> \
+                                <dt> \
+                                    Start \
+                                </dt> \
+                                <dd> \
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <strong>Date:</strong>&nbsp;&nbsp;{{ event.start_datetime.date }} \
+                                    <br/> \
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <strong>Time:</strong>&nbsp;&nbsp;{{ event.start_datetime.time }} \
+                                </dd> \
+                            </dl> \
+                    </div> \
+                    <div class='col-md-6 col-sm-6 col-xs-6'> \
+                            <dl> \
+                                <dt> \
+                                    End \
+                                </dt> \
+                                <dd> \
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <strong>Date:</strong>&nbsp;&nbsp;{{ event.end_datetime.date }} \
+                                    <br/> \
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <strong>Time:</strong>&nbsp;&nbsp;{{ event.end_datetime.time }} \
+                                </dd> \
+                            </dl> \
+                    </div> \
+                </div> \
+                <div class='row'> \
+                    <div class='col-lg-12' > \
+                            <a class='btn btn-info full-width' href='{{ event.url }}'> \
+                                Learn More! \
+                            </a> \
+                    </div> \
+                </div> \
+            </div> \
+        "
+    });
+    markers.push(marker)
+    {% endfor %}
+
+    /* now inside your initialise function */
+    var infowindow = new google.maps.InfoWindow({
+        content: "boo",
+        maxWidth: 400,
+        minWidth: 400
+    });
+
+    for (var i = 0; i < markers.length; i++) {
+        var marker = markers[i];
+        google.maps.event.addListener(marker, 'click', function () {
+            // where I have added .html to the marker object.
+            infowindow.setContent(this.html);
+            infowindow.open(map, this);
+        });
+    }
+    google.maps.event.addListener(map, 'click', function () {
+        infowindow.close();
+    });
+
+
+    /*
+    * The google.maps.event.addListener() event waits for
+    * the creation of the infowindow HTML structure 'domready'
+    * and before the opening of the infowindow defined styles
+    * are applied.
+    */
+    google.maps.event.addListener(infowindow, 'domready', function() {
+
+        // Reference to the DIV which receives the contents of the infowindow using jQuery
+        var iwOuter = $('.gm-style-iw');
+
+        /* The DIV we want to change is above the .gm-style-iw DIV.
+        * So, we use jQuery and create a iwBackground variable,
+        * and took advantage of the existing reference to .gm-style-iw for the previous DIV with .prev().
+        */
+        var iwBackground = iwOuter.prev();
+
+        // Remove the background shadow DIV
+        iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+
+        // Remove the white background DIV
+        iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+
+
+
+        // Changes the desired tail shadow color.
+        iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+
+        // Taking advantage of the already established reference to
+        // div .gm-style-iw with iwOuter variable.
+        // You must set a new variable iwCloseBtn.
+        // Using the .next() method of JQuery you reference the following div to .gm-style-iw.
+        // Is this div that groups the close button elements.
+        var iwCloseBtn = iwOuter.next();
+
+        // Apply the desired effect to the close button
+        iwCloseBtn.css({
+            width:'19px',height:'19px',
+            opacity: '1', // by default the close button has an opacity of 0.7
+            right: '10px', top: '21px', // button repositioning
+            // border: '3px solid #48b5e9', // increasing button border and new color
+            // 'border-radius': '20px', // circular effect
+            // 'box-shadow': '0 0 5px #3990B9' // 3D effect to highlight the button
+        });
+
+        // The API automatically applies 0.7 opacity to the button after the mouseout event.
+        // This function reverses this event to the desired value.
+        iwCloseBtn.mouseout(function(){
+            $(this).css({opacity: '1'});
+        });
+    });
+
+
+
+}
+
+
+</script>
+
+
+{% endblock %}
