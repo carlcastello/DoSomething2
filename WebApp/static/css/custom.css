@@ -1,0 +1,101 @@
+/*
+ * Start Bootstrap - Full (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+
+/* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
+
+.home-page .middle {
+    margin-top:24vh;
+    z-index:1;
+}
+
+.detail-page .middle {
+    margin-top:4vh;
+    z-index:1;
+}
+
+
+.detail-page blockquote > p {
+    font-size:15px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.page-header {
+    border-bottom: 1px solid #eee;
+    margin-top: 10px !important;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+
+body {
+	background: none;
+	padding-top: 51px;
+}
+
+.full {
+    background: url("../images/background.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow-x:hidden;
+}
+
+
+.navbar-inverse .navbar-nav>li>a.active,
+.navbar-inverse .navbar-nav>li>a.active:focus,
+.navbar-inverse .navbar-nav>li>a.active:hover {
+    color: #fff;
+    background-color: #080808;
+}
+
+
+body>.container {
+    margin-top:20px;
+}
+
+
+.carousel-container {
+    margin-bottom:20px
+}
+
+.thumbnail {
+    min-height:200px;
+    position:relative;
+}
+
+.ratings {
+    position: absolute;
+    bottom: 0;
+    left: 13px;
+    right: 13px;
+    color: #d17581;
+}
+.website-url-container {
+    word-wrap: break-word;
+}
+
+.stars {
+    color: #d17581;
+}
+
+.page-content {
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.navbar-inverse .navbar-brand {
+    color:white;
+}

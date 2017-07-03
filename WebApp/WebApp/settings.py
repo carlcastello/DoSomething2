@@ -25,7 +25,7 @@ SECRET_KEY = '&=62op65z5ppewhyulm&g^ae(9$jgup3d%r*aj0&-fv0et3a5b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['35.182.190.66','127.0.0.1']
 
 
 # Application definition
@@ -123,10 +123,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "DoSomething/static"),
+    # os.path.join(BASE_DIR, "DoSomething/static"),
 ]
 
 GEOIP_PATH = os.path.join(BASE_DIR, "DoSomething/GeoIp")
