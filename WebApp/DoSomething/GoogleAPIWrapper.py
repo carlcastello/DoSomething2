@@ -221,18 +221,19 @@ class GoogleSearch:
         #  This Handles Review
         try:
             for place_review in place_detail["reviews"]:
+                print place_review
                 review = Review(
-                    rating=place_review["rating"].encode('utf-8'),
+                    rating=place_review["rating"],
                     text=place_review["text"].encode('utf-8'),
-                    time=place_review["time"].encode('utf-8'),
+                    time=place_review["time"],
                     author_url=place_review["author_url"].encode('utf-8'),
                     author_name=place_review["author_name"].encode('utf-8'),
                     relative_time_description=place_review["relative_time_description"].encode('utf-8'),
                     place=place
                 )
                 review.save()
-        except:
-            pass
+        except Exception, e:
+            print str(e)
 
         # Handles Opening Hours
         try:
